@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>QQ列表展示</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			body { background:#555; }
+			#list { width:200px; margin:0 auto; border:1px solid #fff; }
+			#list h2 { cursor:pointer; border-bottom:1px solid #fff; font-size:14px; height:30px; line-height:30px; padding-left:21px; background:url(images/ico1.gif) no-repeat 6px center,#3792A3; color:#fff; }
+			#list li ul li { height:26px; line-height:26px; font-size:14px; border-bottom:1px solid #ccc; padding-left:22px; }
+			#list li ul { display:none; background:#fff; }
+			#list .active { background:url(images/ico2.gif) no-repeat 6px center,#164B55; }
+		</style>
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var aTitle=oList.getElementsByTagName('h2');
+				var aUl=oList.getElementsByTagName('ul');
+				var aLi=null;
+				var arrLi=[]; 
+				
+				for (var i=0; i<aUl.length; i++){
+					aLi=aUl[i].getElementsByTagName('li');
+					for (var j=0; j<aLi.length; j++){
+						arrLi.push(aLi[j]);
+					}
+				}
+				
+				for (var i=0; i<arrLi.length; i++){
+					arrLi[i].index=i;
+					arrLi[i].onclick=function (){
+						for (var i=0; i<arrLi.length; i++){
+							arrLi[i].style.background='none';
+						}
+						this.style.background='#ffc';
+					}
+				}
+
+				for (var i=0; i<aTitle.length; i++){
+					aTitle[i].index=i;			//索引值（用于找到对应的aUl）。
+					aTitle[i].onclick=function (){
+						if (this.className=='active'){	//点击后当前的 aTitle 会加一个类 active （可以用来判断当前点击的这个aUl 是否是显示状态）。
+							aUl[this.index].style.display='none';
+							this.className='';
+						}
+						else
+						{
+							aUl[this.index].style.display='block';
+							this.className='active';
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<h2>我的好友</h2>
+				<ul>
+					<li>张三</li>
+					<li>张三</li>
+					<li>张三</li>
+					<li>张三</li>
+					<li>张三</li>
+				</ul>
+			</li>
+			<li>
+				<h2>企业好友</h2>
+				<ul>
+					<li>李四</li>
+					<li>李四</li>
+					<li>李四</li>
+					<li>李四</li>
+					<li>李四</li>
+				</ul>
+			</li>
+			<li>
+				<h2 style="border:none">黑名单</h2>
+				<ul>
+					<li>哈哈</li>
+					<li>嘿嘿</li>
+					<li>啪啪</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
