@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>自定义属性一组开关应用</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			input { width:60px; height:60px; margin:40px; font-size:20px; }
+		</style>
+		<script>
+			window.onload=function (){
+				var aInput=document.getElementsByTagName('input');
+				var arr=['A','B','C','D'];
+				
+				for (var i=0; i<aInput.length; i++){
+					aInput[i].num=0;					//为每个 input 创建一个自定义属性 num=0。
+					aInput[i].onclick=function (){
+						this.value=arr[this.num];		//点击 input 让当前 input 的 value 值等于数组里第 this.num 位的值。 
+						this.num++;						//每点击一次input就让自定义属性 num 加一。
+						if (this.num==arr.length){
+							this.num=0;					//
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="0" />
+		<input type="button" value="0" />
+		<input type="button" value="0" />
+	</body>
+</html>
