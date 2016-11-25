@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>两组图片轮播</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			body { background:#555; }
+			#main { width:790px; margin:100px auto;  }
+			#box1,#box2 { float:left; position:relative; padding:20px; background:#fff; border-radius:10px; }
+			#box1 img,#box2 img { width:100%; height:260px; }
+			#box1 { width:400px; }
+			#box2 { width:220px; margin-left:20px; }
+			#main p { font-size:14px; text-align:center; font-weight:bold; }
+			#main span { font-weight:normal; font-size:14px; }
+			#btn_box { height:50px; line-height:50px; }
+			#btn_box input { background:none; border:1px solid #F8552C; font-size:14px; padding:6px 20px; border-radius:8px; outline:none; color:#F8552C; cursor:pointer; -webkit-transition:0.2s; transition:0.2s; }
+			#btn_box input:hover { background:#F8552C; color:#fff; }
+		</style>
+		<script>
+			window.onload=function (){
+				//第一组。
+				var oBox1=document.getElementById('box1');
+				var oImg1=oBox1.getElementsByTagName('img')[0];
+				var oP1=oBox1.getElementsByTagName('p')[0];
+				var oSpan1=oBox1.getElementsByTagName('span')[0];
+				var arrImg1=['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg'];
+				var n=0;
+				
+				//第二组。
+				var oBox2=document.getElementById('box2');
+				var oImg2=oBox2.getElementsByTagName('img')[0];
+				var oP2=oBox2.getElementsByTagName('p')[0];
+				var oSpan2=oBox2.getElementsByTagName('span')[0];
+				var arrImg2=['images/1.png','images/2.png','images/3.png'];
+				var m=0;
+				
+				var oPrev=document.getElementById('prev');
+				var oNext=document.getElementById('next');
+				
+				function Ply1(){		//第一组图片初始化函数。
+					oImg1.src=arrImg1[n];
+					oP1.innerHTML='第一组 第 '+(n+1)+' 张';
+					oSpan1.innerHTML=n+1+'/'+arrImg1.length;
+				}
+				function Ply2(){		//第二组图片初始化函数。
+					oImg2.src=arrImg2[m];
+					oP2.innerHTML='第一组 第 '+(m+1)+' 张';
+					oSpan2.innerHTML=m+1+'/'+arrImg2.length;
+				}
+				Ply1();
+				Ply2();
+				
+				oImg1.onclick=function (){
+					n++;
+					if (n==arrImg1.length){
+						n=0;
+					}
+					Ply1();
+				}
+				oImg2.onclick=function (){
+					m++;
+					if (m==arrImg2.length){
+						m=0;
+					}
+					Ply2();
+				}
+				
+				oPrev.onclick=function (){
+					m--;
+					n--;
+					if (m==-1){
+						m=arrImg2.length-1;
+					}
+					if (n==-1){
+						n=arrImg1.length-1;
+					}
+					Ply1();
+					Ply2();
+				}
+				oNext.onclick=function (){
+					m++;
+					n++;
+					if (m==arrImg2.length){
+						m=0;
+					}
+					if (n==arrImg1.length){
+						n=0;
+					}
+					Ply1();
+					Ply2();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<div id="btn_box">
+				<input id="prev" type="button" value="上一组" />
+				<input id="next" type="button" value="下一组" />
+			</div>
+			<div id="box1">
+				<img src="" />
+				<p>第一组 第1张</p>
+				<span>1/4</span>
+			</div>
+			<div id="box2">
+				<img src="" />
+				<p>第二组 第1张</p>
+				<span>1/3</span>
+			</div>
+		</div>
+	</body>
+</html>
