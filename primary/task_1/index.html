@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>1_入门热身</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; font-weight:normal; text-decoration:none; }
+			#box { width:100px; height:100px; border:5px solid #000; margin-left:40px; }
+			h1 { display:inline-block; font-size:30px; font-weight:normal; margin:20px; }
+			input { display:inline; background:red; color:#fff; font-size:20px; padding:0 40px; height:40px; line-height:40px; border:none; }
+			#mask { position:absolute; top:0px; left:0px; background:rgba(0,0,0,.4); width:100%; height:100%; display:none; }
+			.set_win { width:400px; background:#fff; border:10px solid rgba(0,0,0,.2); border-radius:10px; margin:200px auto; }
+			.set_win div { text-align:center; margin:16px 0; }
+			.set_win h2 { display:inline-block; font-size:18px; }
+			.set_win a { display:inline-block; width:34px; heihgt:34px; line-height:34px; text-align:center; color:#fff; margin:0 6px; }
+			.set_win .b a:nth-of-type(1) { background:red; }
+			.set_win .b a:nth-of-type(2) { background:green; }
+			.set_win .b a:nth-of-type(3) { background:blue; }
+			.set_win .b a:hover { opacity:0.6; }
+			.set_win .w a,.set_win .h a { border:1px solid #888; background:#fff; color:#666; }
+			.sub a { display:inline-block; font-size:18px; color:#fff; background:#996; width:100px; }
+		</style>
+	</head>
+	<body>
+		<h1>点我为 box 设置样式：</h1>
+		<input type="button" id="btn" value="点击设置" />
+		<div id="box">box</div>
+		<div id="mask">
+			<div class="set_win">
+				<div class="b">
+					<h2>请选择背景颜色:</h2>
+					<a href="javascript:;" id="setRed">红</a>
+					<a href="javascript:;" id="setGreen">绿</a>
+					<a href="javascript:;" id="setBlue">蓝</a>
+				</div>
+				<div class="w">
+					<h2>请选择宽度(px):</h2>
+					<a href="javascript:;" id="setTwo">200</a>
+					<a href="javascript:;" id="setThree">300</a>
+					<a href="javascript:;" id="setFour">400</a>
+				</div>
+				<div class="h">
+					<h2>请选择高度(px):</h2>
+					<a href="javascript:;" id="hTwo">200</a>
+					<a href="javascript:;" id="hThree">300</a>
+					<a href="javascript:;" id="hFour">400</a>
+				</div>
+				<div class="sub">
+					<a href="javascript:;" id="red">恢复</a>
+					<a href="javascript:;" id="yes">确认</a>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			var oBox=document.getElementById('box');
+			var oBtn=document.getElementById('btn');
+			var oMask=document.getElementById('mask');
+			var oSetRed=document.getElementById('setRed');
+			var oSetGreen=document.getElementById('setGreen');
+			var oSetBlue=document.getElementById('setBlue');
+			var oSetTwo=document.getElementById('setTwo');
+			var oSetThree=document.getElementById('setThree');
+			var oSetFour=document.getElementById('setFour');
+			var oHtwo=document.getElementById('hTwo');
+			var oHthree=document.getElementById('hThree');
+			var oHfour=document.getElementById('hFour');
+			var oRed=document.getElementById('red');
+			var oYes=document.getElementById('yes');
+			
+			setStyle(oBtn,oMask,'display','block');
+			
+			setStyle(oSetRed,oBox,'backgroundColor','red');
+			setStyle(oSetGreen,oBox,'backgroundColor','green');
+			setStyle(oSetBlue,oBox,'backgroundColor','blue');
+			
+			setStyle(oSetTwo,oBox,'width','200px');
+			setStyle(oSetThree,oBox,'width','300px');
+			setStyle(oSetFour,oBox,'width','400px');
+			
+			setStyle(oHtwo,oBox,'height','200px');
+			setStyle(oHthree,oBox,'height','300px');
+			setStyle(oHfour,oBox,'height','400px');
+			
+			setStyle(oYes,oMask,'display','none');
+			
+			oRed.onclick=function (){
+				oBox.style.width=100+'px';
+				oBox.style.height=100+'px';
+				oBox.style.backgroundColor='#fff';
+			}
+			
+			alert (typeof oBox.id)
+			function setStyle(ele,obj,name,value){
+				ele.onclick=function (){
+					obj.style[name]=value;
+				}
+			}
+		</script>
+	</body>
+</html>
