@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>模拟微信消息发送</title>
+		<meta charset="utf-8">
+		<style>
+			/*清浮动*/
+			.clear:after { content:''; display:block; clear:both; }
+			.clear { zoom:1; }
+			* { margin:0px; padding:0px; font-weight:normal; font-family:'黑体'; }
+			.iphone_bg { position:relative; background:url(images/ip6_bg.png) no-repeat; width:368px; height:752px; margin:0 auto; }
+			.iphone_main { position:absolute; top:92px; left:23px; width:320px; height:568px; }
+			.iphone_head { width:100%; height:45px; background:#373b3e; position:relative; }
+			.left { float:left; cursor:pointer; height:20px; width:44px; border-right:1px solid #2e3235; background:url(images/left_icon.jpg) no-repeat center; background-size:15px 15px; margin-top:12px; }
+			.iphone_head h2 { font-size:16px; color:#f2f6f9; line-height:45px; padding-left:54px; }
+			.iphone_head h2 i { display:inline-block; width:14px; height:14px; background:url(images/title_icon.jpg) no-repeat; background-size:100% 100%; margin-left:10px; position:relative; top:1px; }
+			.right { position:absolute; right:0px; top:0px; cursor:pointer; width:50px; height:45px; background:url(images/user_icon.jpg) no-repeat center; background-size:100% 100%; }
+			.main_info { padding-top:10px; width:100%; height:470px; background:#ebebeb; overflow:auto; }
+			.send_box { background:#fff; height:42px; line-height:42px; border-top:1px solid #d2d2d2; }
+			.send_box img { float:left; border:1px solid #ccc; cursor:pointer; width:30px; height:30px; border-radius:15px; margin:6px 5px 0 6px; }
+			.send_box input { float:left; display:inline-block; width:224px; height:30px; margin-top:7px; padding:0px; border:none; border-bottom:1px solid #ccc; outline:none; font-size:15px; }
+			.send_box input:focus { border-color:#67a540; }
+			.send_box a { float:left; display:block; width:40px; height:28px; line-height:28px; background:#19ab18; border:1px solid #059d0c; border-radius:4px; color:#fff; text-align:center; text-decoration:none; margin:6px 0 0 6px; }
+			.info { padding:0px 6px 0 6px; margin-bottom:10px; }
+			.info img { float:left; width:36px; height:36px; }
+			.info p { float:left; display:block; max-width:210px; position:relative; line-height:24px; padding:6px 8px; background:#fff; border:1px solid #ccc; border-radius:6px; font-size:14px; color:#000; }
+			.info p:after { position:absolute; display:block; content:''; border:5px solid transparent; }
+			.info p:before { position:absolute; display:block; content:''; border:4px solid transparent; z-index:1; }
+			.info_left img { margin-right:7px; }
+			.info_right img { margin-left:7px; }
+			.info_right p { float:right; background:#b1e866; border:1px solid #749c2a; }
+			.info_right img { float:right; }
+			.info_left p:after { top:13px; left:-11px; border-right:6px solid #ccc; }
+			.info_left p:before { top:14px; left:-9px; border-right:5px solid #fff; }
+			.info_right p:after { top:13px; right:-11px; border-left:6px solid #749c2a; }
+			.info_right p:before { top:14px; right:-9px; border-left:5px solid #b1e866; }
+		</style>
+	</head>
+	<body>
+		<div class="iphone_bg">
+			<div class="iphone_main">
+				<div class="iphone_head">
+					<div class="left"></div>
+					<h2>小白鼠<i></i></h2>
+					<div class="right"></div>
+				</div>
+				<div class="main_info" id="info">
+					
+				</div>
+				<div class="send_box">
+					<img src="images/user.jpg" id="user" />
+					<input type="text" id="txt" />
+					<a href="javascript:;" id="sub">发送</a>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			var oSub=document.getElementById('sub');
+			var oTxt=document.getElementById('txt');
+			var oInfo=document.getElementById('info');
+			var oUser=document.getElementById('user');
+			
+			var oUser_src=true;
+			
+			oUser.onclick=function (){
+				if (oUser_src){
+					oUser.src='images/user1.jpg';
+					oUser_src=false;
+				}
+				else 
+				{
+					oUser.src='images/user.jpg';
+					oUser_src=true;
+				}
+			}
+			
+			oSub.onclick=function (){
+				oInfo_text=oInfo.innerHTML;
+				if (oTxt.value==''){
+					alert('亲，好歹写点吧，我忙到这么晚的~~');
+					return false;
+				}
+				if (oUser_src){
+					oInfo.innerHTML='<div class="info info_right clear"><img src="'+oUser.src+'" /><p>'+oTxt.value+'</p></div>'+oInfo_text;
+					oTxt.value='';
+				}
+				else
+				{
+					oInfo.innerHTML='<div class="info info_left clear"><img src="'+oUser.src+'" /><p>'+oTxt.value+'</p></div>'+oInfo_text;
+					oTxt.value='';
+				}
+			}
+		</script>
+	</body>
+</html>
