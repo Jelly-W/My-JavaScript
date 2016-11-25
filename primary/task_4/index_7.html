@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>带缩略图的图片轮播</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; text-decoration:none; }
+			body { background:#555; }
+			#box { width:320px; height:360px; margin:0 auto; position:relative; }
+			#box img { width:320px; height:360px; }
+			#box a { position:absolute; top:50%; margin-top:-20px; opacity:0.6; border-radius:50%; display:block; width:40px; height:40px; line-height:40px; text-align:center; font-size:20px; background:#555; color:#fff; }
+			#box #prev { left:5px; }
+			#box #next { right:5px; }
+			#list { position:absolute; left:50%; bottom:12px; height:10px; }
+			#list li { float:left; position:relative; margin:0 4px; border-radius:50%; width:12px; height:12px; background:#555; cursor:pointer; }
+			#list .active { background:#FF6600; }
+			#list li div { display:none; position:absolute; bottom:20px; left:-26px; width:60px; height:80px; border:2px solid #fff; border-radius:6px; }
+			#list li img { width:100%; height:100%; }
+			#list li div:before { position:absolute; bottom:-12px; left:50%; margin-left:-6px; content:''; display:block; border:6px solid transparent; border-top:6px solid #fff; }
+		</style>
+		<script>
+			window.onload=function (){
+				var oBox=document.getElementById('box');
+				var oImg=oBox.getElementsByTagName('img')[0];
+				var oPrev=document.getElementById('prev');
+				var oNext=document.getElementById('next');
+				var oList=document.getElementById('list');
+				var aLi=oList.getElementsByTagName('li');
+				var arrImg=['images/1.png','images/2.png','images/3.png','images/4.png','images/active.png','images/normal.png'];
+				var num=0;			//变量num存放当前显示的图片的位置（数字）。
+				
+				for (var i=0; i<arrImg.length; i++){		//插入缩略图
+					oList.innerHTML+='<li><div><img src="'+arrImg[i]+'"/></div></li>';
+				}
+				oList.style.marginLeft=-(aLi.length*20)/2+'px';		//动态计算oList的margin-left值（始终保持水平居中）。
+				
+				function tab(){		//初始化函数。
+					for (var i=0; i<aLi.length; i++){
+						aLi[i].className='';
+					}
+					oImg.src=arrImg[num];
+					aLi[num].className='active';
+				}
+				tab();	//初始化。
+				
+				oPrev.onclick=function (){
+					num--;
+					if (num==-1){
+						num=arrImg.length-1;
+					}
+					tab();
+				}
+				oNext.onclick=function (){
+					num++;
+					if (num==arrImg.length){
+						num=0;
+					}
+					tab();
+				}
+				
+				for (var i=0; i<aLi.length; i++){
+					aLi[i].index=i;
+					aLi[i].onmouseover=function (){		//鼠标移入显示缩略图。
+						this.getElementsByTagName('div')[0].style.display='block';
+					}
+					aLi[i].onmouseout=function (){		//鼠标移出隐藏缩略图。
+						this.getElementsByTagName('div')[0].style.display='none';
+					}
+					aLi[i].onclick=function (){
+						num=this.index;
+						tab();
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<img src="" />
+			<a href="javascript:;" id="prev"><</a>
+			<a href="javascript:;" id="next">></a>
+			<ul id="list"><ul>
+		</div>
+	</body>
+</html>
