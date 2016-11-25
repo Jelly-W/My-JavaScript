@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>自定义属性一组开关应用</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			ul { margin:60px; }
+			li { float:left; margin:20px; width:105px; height:136px; background:url(images/normal.png) no-repeat; }
+		</style>
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var aLi=oList.getElementsByTagName('li');
+				
+				for (var i=0; i<aLi.length; i++){
+					aLi[i].onOff=true;				//给每个 li 添加自定义属性  onOff=true。
+					aLi[i].onclick=function (){
+						if (this.onOff){			//判断当前这个 li 的自定义属性 onOff 是否为 true。
+							this.style.background='url(images/active.png) no-repeat';
+							this.onOff=false;		
+						}
+						else
+						{
+							this.style.background='url(images/normal.png) no-repeat';
+							this.onOff=true;
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="list">
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+</html>
