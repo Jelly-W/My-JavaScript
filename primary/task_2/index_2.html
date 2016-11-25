@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>图片切换</title>
+		<meta charset="utf-8"/>
+		<style>
+			* { margin:0px; padding:0px; }
+			.box { position:relative; width:500px; height:320px; margin:10px auto; border:6px solid rgba(0,0,0,.4); }
+			.box a { position:absolute; top:50%; margin-top:-22px; display:block; width:40px; height:40px; text-align:center; line-height:40px; font-size:30px; background:#000; color:#fff; text-decoration:none; border:4px solid #fff; }
+			#prev { left:10px; }
+			#next { right:10px; }
+			#number,#info { position:absolute; width:100%; height:34px; line-height:34px; color:#fff; background:rgba(0,0,0,.6); text-align:center; }
+			#number {  top:0px; left:0px;  }
+			#info { bottom:0px; left:0px; }
+			.btn { width:500px; text-align:center; margin:100px auto 0px; height:40px; }
+			.btn input { width:100px; height:40px; font-size:16px; background:green; color:#fff; border:none; border-radius:20px; outline:none; cursor:pointer; }
+		</style>
+		
+		<script>
+			window.onload=function (){
+				var oPrev=document.getElementById('prev');
+				var oNext=document.getElementById('next');
+				var oImg=document.getElementById('img');
+				var oNumber=document.getElementById('number');
+				var oInfo=document.getElementById('info');
+				var oPlay_1=document.getElementById('play_1');
+				var oPlay_2=document.getElementById('play_2');
+				
+				var info=['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg'];
+				var text=['我是樱花1号','我是樱花2号','我是樱花3号','我是樱花4号'];
+				
+				var num=0;
+				//var of=0;
+				//var ov=info.length-1;
+				
+				function tab(){
+					oImg.src=info[num];
+					oNumber.innerHTML= num+1 +'/'+ info.length;
+					oInfo.innerHTML=text[num];
+				}
+				function tab1(){
+					oNext.onclick=function (){
+						num++;
+						if (num==info.length){
+							num=0;
+						}
+						tab();
+					}
+					oPrev.onclick=function (){
+						num--;
+						if (num==-1){
+							num=info.length-1;
+						}
+						tab();
+					}
+				}
+				
+				tab();
+				tab1();
+				
+				oPlay_1.onclick=function (){
+					tab1();
+				}
+				oPlay_2.onclick=function (){
+					oNext.onclick=function (){
+						num++;
+						if (num==info.length){
+							num=info.length-1;
+							alert('这是最后一张咯');
+						}
+						tab();
+					}
+					oPrev.onclick=function (){
+						num--;
+						if (num==-1){
+							num=0;
+							alert('这是第一张哦');
+						}
+						tab();
+					}
+				}
+				
+				
+				
+				/*
+				function Next(){
+					num++;
+					if (num==info.length){
+						num=of;
+						if (of==info.length-1){
+							alert('这是最后一张咯');
+						}
+					}
+					
+					tab();
+				}
+				function Prev(){
+					num--;
+					if (num==-1){
+						num=ov;
+						if (ov==0){
+							alert('这是第一张哦');
+						}
+					}
+					tab();
+				}
+				oPlay_1.onclick=function (){
+					of=0;
+					ov=info.length-1;
+				}
+				oPlay_2.onclick=function (){
+					of=info.length-1;
+					ov=0;
+				}
+				oNext.onclick=Next;
+				oPrev.onclick=Prev;
+				*/
+			}
+		</script>
+	</head>
+	<body>
+		<div class="btn">
+			<input id="play_1" type="button" value="循环播放" />
+			<input id="play_2" type="button" value="顺序播放" />
+		</div>
+		<div class="box">
+			<a href="javascript:;" id="prev"><</a>
+			<a href="javascript:;" id="next">></a>
+			<img id="img" src="images/1.jpg" />
+			<span id="number">1/4</span>
+			<p id="info">图片加载中...</p>
+		</div>
+	</body>
+</html>
