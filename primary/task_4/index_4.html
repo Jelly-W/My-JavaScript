@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>图片切换</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			body { background:#333; }
+			#box { position:relative; width:300px; height:400px; margin:0px auto; background:url(images/loader_ico.gif) no-repeat center center; }
+			img { width:300px; height:400px; }
+			ul { position:absolute; left:305px; top:0px; }
+			li { display:block; width:40px; height:40px; background:#ccc; margin-bottom:5px; }
+			p,span { position:absolute; width:100%; height:40px; line-height:40px; background:rgba(0,0,0,.6); color:#fff; text-align:center; font-size:16px; }
+			p { bottom:0px; left;0px; }
+			span { top:0px; left;0px; }
+			.active { background:#FC3; }
+		</style>
+		
+		<script>
+			window.onload=function (){
+				var oBox=document.getElementById('box');
+				var oList=document.getElementById('list');
+				var oImg=oBox.getElementsByTagName('img')[0];
+				var oSpan=oBox.getElementsByTagName('span')[0];
+				var oP=oBox.getElementsByTagName('p')[0];
+				var aLi=oList.getElementsByTagName('li');
+				var arrImg=['images/1.png','images/2.png','images/3.png','images/4.png'];
+				var arrText=['我是第一张图片','我是第二张图片','我是第三张图片','我是第四张图片'];
+				var num=0;
+				var oldLi=null;
+				
+				for (var i=0; i<arrImg.length; i++){
+					oList.innerHTML+='<li></li>';
+				}
+				oldLi=aLi[num];
+				//初始化
+				function tab(){
+					aLi[num].className='active';
+					oSpan.innerHTML=num+1+'/'+arrImg.length;
+					oImg.src=arrImg[num];
+					oP.innerHTML=arrText[num];
+				}
+				tab();
+				for (var i=0; i<aLi.length; i++){
+					aLi[i].index=i;
+					aLi[i].onclick=function (){
+						num=this.index;
+						tab();
+						//思路一：清空所以 aLi 的 className 为当前的 aLi 添加 className。
+						for (var i=0; i<aLi.length; i++){
+							aLi[i].className='';
+						}
+						//思路二：清掉上一个 className 为active 的aLi，为当前的 aLi 添加 className。
+						/*
+						oldLi.className='';
+						oldLi=this;
+						*/
+						this.className='active';
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<img src="" />
+			<ul id="list"></ul>
+			<p>我是文字说明加载中...</p>
+			<span>我是数量说明加载中...</span>
+		</div>
+	</body>
+</html>
