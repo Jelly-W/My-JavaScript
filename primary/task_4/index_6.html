@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>QQ列表展示</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			body { background:#555; }
+			#list { width:200px; margin:0 auto; border:1px solid #fff; }
+			#list h2 { cursor:pointer; border-bottom:1px solid #fff; font-size:14px; height:30px; line-height:30px; padding-left:21px; background:url(images/ico1.gif) no-repeat 6px center,#3792A3; color:#fff; }
+			#list li ul li { height:26px; line-height:26px; font-size:14px; border-bottom:1px solid #ccc; padding-left:22px; }
+			#list li ul { display:none; background:#fff; }
+			#list .active { background:url(images/ico2.gif) no-repeat 6px center,#164B55; }
+			#list .hover { background:#ffc; }
+		</style>
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var aH2=oList.getElementsByTagName('h2');
+				var aUl=oList.getElementsByTagName('ul');
+				var aLi=null;		
+				var arrLi=[];	
+				
+				for (var i=0; i<aUl.length; i++){
+					aLi=aUl[i].getElementsByTagName('li');		//每循环一次aLi获得当前这个aUl里的所以li（aLi现在是一个集合）。
+					for (var j=0; j<aLi.length; j++){			//for套for，循环外层for当前这次aLi集合里的所有值。
+						arrLi.push(aLi[j]);						//把这个集合里的所有值，存放到数组。
+					}
+				}
+				
+				for (var i=0; i<arrLi.length; i++){
+					arrLi[i].onOff=true;
+					arrLi[i].onclick=function (){
+						for (var i=0; i<arrLi.length; i++){
+							arrLi[i].className='';
+						}
+						if (this.onOff){
+							this.className='hover';
+							this.onOff=false;
+						}
+						else
+						{
+							this.className='';
+							this.onOff=true;
+						}
+						for (var i=0; i<arrLi.length; i++){
+							if (arrLi[i].className==''){
+								arrLi[i].onOff=true;
+							}
+						}
+					}
+				}
+				
+				for (var i=0; i<aH2.length; i++){
+					aH2[i].index=i;
+					aH2[i].onOff=true;						//开关索引值
+					aH2[i].onclick=function (){
+						for (var i=0; i<aUl.length; i++){	//点击aH2时先让所以的ul隐藏，且清空所以aH2的class。
+							aUl[i].style.display='none';
+							aH2[i].className='';
+						}
+						
+						if (this.onOff){			//判断当前点击的这个按钮的索引值是否为true。
+							//前的开关索引值是true执行这里的代码。
+							aUl[this.index].style.display='block';	//让对应当前按钮的aUl显示。
+							this.className='active';				//当前按钮的class设置为active。
+							this.onOff=false;						//并让当前的开关索引值变成false。
+						}
+						else
+						{
+							//前的开关索引值是false执行这里的代码。
+							aUl[this.index].style.display='none';
+							this.className='';
+							this.onOff=true;
+						}
+						
+						for (var i=0; i<aH2.length; i++){		//点击了第一个aH2（第一个aH2的开关索引值为false）后当点击第二个aH2这时会把所有aH2的class清空并把对应的aUl隐藏（这时第一个aH2的开关索引值还是false）。
+							if (aH2[i].className==''){			//思路：就把所有class为空的aH2的开关索引值全部设置为true。
+								aH2[i].onOff=true;
+							}
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<h2>我的好友</h2>
+				<ul>
+					<li>张三</li>
+					<li>张三</li>
+					<li>张三</li>
+					<li>张三</li>
+					<li>张三</li>
+				</ul>
+			</li>
+			<li>
+				<h2>企业好友</h2>
+				<ul>
+					<li>李四</li>
+					<li>李四</li>
+					<li>李四</li>
+					<li>李四</li>
+					<li>李四</li>
+				</ul>
+			</li>
+			<li>
+				<h2 style="border:none">黑名单</h2>
+				<ul>
+					<li>哈哈</li>
+					<li>嘿嘿</li>
+					<li>啪啪</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
