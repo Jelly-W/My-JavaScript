@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>自定义属性多组图片切换</title>
+		<meta charset="utf-8" />
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			ul { margin:100px auto; width:660px; }
+			li { float:left; width:200px; margin:0 10px; }
+			input { display:block; width:200px; height:40px; font-size:18px; border:none; outline:none; cursor:pointer; }
+			img { width:200px; height:245px; }
+		</style>
+		
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var aBtn=oList.getElementsByTagName('input');
+				var aImg=oList.getElementsByTagName('img');
+				var arrSrc=['images/1.png','images/2.png','images/3.png','images/4.png'];
+				var num=0;
+				
+				for (var i=0; i<aImg.length; i++){
+					aImg[i].src=arrSrc[num];
+					aBtn[i].value='切换('+(num+1)+')';
+				}
+				
+				for (var i=0; i<aBtn.length; i++){
+					aBtn[i].num=0;				//为每个 aBtn 创建一个自定义属性 num=0。
+					aBtn[i].m=i;				//为每个 aBtn 创建一个自定义属性 m ，m 的值随循环递增。
+					aBtn[i].onclick=function (){
+						this.num++;							//每点击一次某个按钮当前这个按钮的num属性就加一。
+						if (this.num==arrSrc.length){		//当某个按钮当前的num值等于arrSrc数组的长度时，就表示没有数据了，num需要重置为 0 。
+							this.num=0;
+						}
+						aBtn[this.m].value='切换('+(this.num+1)+')';
+						aImg[this.m].src=arrSrc[this.num];	//aImg[this.m]:找到 aImg 集合中对应当前按钮的 img，arrSrc[this.num]:找到arrSrc数组中的当前自定义属性 num(每点击一次按钮当前的num属性加一) 个那一组的数据 赋值个当前img 的src。
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<input type="button" value="切换" />
+				<img src="" />
+			</li>
+			<li>
+				<input type="button" value="切换" />
+				<img src="" />
+			</li>
+			<li>
+				<input type="button" value="切换" />
+				<img src="" />
+			</li>
+		</ul>
+	</body>
+</html>
