@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>自动生成100个LI</title>
+		<meta charset="utf-8"/>
+		<style>
+			* { margin:0px; padding:0px; }
+			ul { margin:50px 0 0 20px; position:relative; }
+			li { display:block; width:50px; height:50px; background:red; color:#fff; line-height:50px; text-align:center; position:absolute; left:0px; top:0px; }
+		</style>
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var oBtn=document.getElementById('btn');
+				var m=0;
+				var n=0;
+				var c=0;
+				var arrColor=['red','green','blue','yellow'];
+				var onOff=true;
+				
+				oBtn.onclick=function (){
+					if (onOff){
+						for (var i=0; i<100; i++){
+							oList.innerHTML+='<li>'+i+'</li>'
+						}
+						var aLi=oList.getElementsByTagName('li');
+						for (var i=0; i<aLi.length; i++){
+							if (m==10){		//判断每隔10个li，重新计算。
+								m=0;		
+								n++;
+							}
+							if (c==arrColor.length){
+								c=0;
+							}
+							console.log(m);
+							aLi[i].style.left=m*60+'px';	//因为 m 初始值为 0 ，m++ 后 m=1 而循环 i 是从 0 开始递增，所以 m 需要减一。	
+							aLi[i].style.top=n*60+'px';			// n 的值只有当 m 的值为 10 时才执行 n++ ，循环每执行10次 n 才加一 。
+							aLi[i].style.background=arrColor[c];
+							m++;			//m++ 要注意程序执行顺序！！！（先把m=0 执行完毕后，再开始递增）。
+							c++;
+						}
+						onOff=false;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" id="btn" value="自动生成100个LI" />
+		<ul id="list"></ul>
+	</body>
+</html>
