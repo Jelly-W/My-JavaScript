@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Horder</title>
+		<meta charset="UTF-8">
+		<script src="js/flexible.js"></script>
+		<style>
+			* { margin:0px; padding:0px; list-style:none; }
+			ul { position:relative; }
+			li { position:absolute; left:0px; top:0px; width:50px; height:50px; line-height:50px; background:red; color:#fff; text-align:center; font-size:16px; }
+		</style>
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var oBtn=document.getElementById('btn');
+				
+				oBtn.onclick=function (){
+					oList.innerHTML='';
+					for (var i=0; i<5; i++){
+						oList.innerHTML+='<li>'+i+'</li>';
+					}
+					var aLi=oList.getElementsByTagName('li');
+					var m=aLi.length/2;			//创建判断条件（后面需要判断 aLi 集合是否执行到了一半）。
+					console.log(m);				//把 m 的值显示在控制台，计算结果为 2.5 （aLi.length=5,所以是 5/2 = 2.5）。
+					for (var i=0; i<aLi.length; i++){
+						aLi[i].style.left=i*50+'px';	//为每个 aLi 设置 left 值。
+						aLi[i].style.top=i*50+'px';		//为每个 aLi 设置 top 值。
+						if (i>m){						//判断 aLi 是不是执行到了一半（ m 的值是 aLi 长度的一半），注意：当 i=m 时判断结果返回的是 false 。
+							m--;						//这里需要让 aLi 集合中一半以后的所有 li 的 top 值往上走。（m 的值恰恰是 aLi 集合的一半，所以需要 m 每次减一）。
+							console.log(m);
+							aLi[i].style.top=(m-0.5)*50+'px';	//
+							
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input id="btn" type="button" value="自动生成V字形" />
+		<ul id="list"></ul>
+	</body> 
+</html>
