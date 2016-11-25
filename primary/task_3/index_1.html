@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>生成新闻</title>
+		<meta charset="utf-8"/>
+		<script>
+			window.onload=function (){
+				var oList=document.getElementById('list');
+				var oBtn=document.getElementById('btn');
+				var arr=[
+						'王岐山"淡出"媒体40天 中纪委6天打落两"虎"',
+						'北京语文课本收录《圣经》章节 官方：开阔视野',
+						'7省上调最低工资标准 上海青海相差近千元',
+						'长江中下游等地迎新一轮强降雨 局地有大暴雨',
+						'陆军政治工作部文工团亮相 公示拟聘对象'
+					];
+					
+				var onOff=true; //  开关
+				oBtn.onclick=function (){
+					if (onOff){
+						for (var i=0; i<5; i++){
+							oList.innerHTML+='<li>'+arr[i]+'</li>';
+						};
+					onOff=false;
+					};
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<input id="btn" type="button" value="生成新闻" />
+		<ul id="list"></ul>
+	</body>
+</html>
